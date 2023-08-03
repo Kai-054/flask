@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload and Display Image</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <style>
+        .uploaded-image {
+            max-width: 20px; /* Adjust the maximum width of the image as desired */
+            height: 40; /* Maintain the aspect ratio of the image */
+            display: block;
+            margin: 20px auto;
+        }
+        .predicted-image {
+            max-width: 1000px; /* Adjust the maximum width of the predicted image as desired */
+            height: auto; /* Maintain the aspect ratio of the predicted image */
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center">Upload and Display Image</h1>
+    <div class="container">
+        <div class="row">
+            <form method="post" action="/" enctype="multipart/form-data">
+                <dl>
+                    <p>
+                        <input type="file" name="file" class="form-control" autocomplete="off" required>
+                    </p>
+                </dl>
+                <p>
+                    <input type="submit" value="Submit" class="btn btn-info">
+                </p>
+            </form>
+        </div>
+        {% if filename %}
+        <div class="row">
+            <img src="{{ url_for('display_image', filename=filename) }}" class="img-responsive" alt="Uploaded Image">
+        </div>
+        {% endif %}
+        {% if predicted_image_paths %}
+        <h2>Predicted Image(s):</h2>
+        <div class="row">
+            {% for path in predicted_image_paths %}
+            <img src="{{ url_for('static', filename='uploads/output.jpg') }}" class="predicted-image" alt="Predicted Image">
+            {% endfor %}
+        </div>
+        {% endif %}
+    </body>
+    </html>

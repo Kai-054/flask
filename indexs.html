@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Python Flask Upload and display image</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />        
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+    <p><h1 align="center">Upload image to find car in image</h1></p>
+    <div class="container">
+        <div class="row">
+            <form method="post" action="/" enctype="multipart/form-data">
+                <dl>
+                    <p>
+                        <input type="file" name="file" class="form-control" autocomplete="off" required>
+                    </p>
+                </dl>
+                <p>
+                    <input type="submit" value="Submit" class="btn btn-info">
+                </p>
+            </form>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <img src="{{ url_for('display_image', filename=predicted_filename) }}" class="uploaded-image" alt="Predicted Image">
+        </div>
+    </div>
+</body>
+</html>
